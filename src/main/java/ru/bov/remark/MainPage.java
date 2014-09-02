@@ -61,6 +61,8 @@ import java.util.*;
 @Scope("prototype")
 public class MainPage extends CssLayout implements View {
 
+    private static final long serialVersionUID = 1L;
+
     @Autowired
     private ImportFromXML importXML;
     @Autowired
@@ -136,7 +138,7 @@ public class MainPage extends CssLayout implements View {
     private Expert expertFilter;
     private static final Set<Rebuke> rebukeFilter = new LinkedHashSet<>();
 
-//    @Autowired
+    //    @Autowired
 //    private MainMenu menu;
     @Autowired
     private MenuToolBar toolBar;
@@ -420,28 +422,28 @@ public class MainPage extends CssLayout implements View {
         projectMenuItemClearFilter.setIcon(new ThemeResource("icons_mini/cross.png"));
 
         projectTable.addItemClickListener(new ItemClickListener() {
-            @SuppressWarnings("unchecked")
-            @Override
-            public void itemClick(ItemClickEvent event) {
-                BeanItem<Project> projectBean = (BeanItem<Project>) projectTable.getItem(projectTable.getValue());
-                if (projectBean == null) return;
-                Project project = projectBean.getBean();
-                if (event.isDoubleClick()) {
-                    if (!role.equals("GIP") && !role.equals("ADMIN")) {
-                        Notification.show(NOTIFY_NOTRIGHT, Type.ERROR_MESSAGE);
-                        return;
-                    } else if (user.equals(project.getBoss()) || role.equals("ADMIN")) {
-                        final BeanItem<Project> item = (BeanItem<Project>) projectTable.getItem(projectTable.getValue());
-                        if (item != null) {
-                            projectEditor.projectEdit(item);
-                            UI.getCurrent().addWindow(projectEditor);
-                        }
-                    }
-                } else {
-                    fireComponentEvent();
-                }
-            }
-        }
+                                              @SuppressWarnings("unchecked")
+                                              @Override
+                                              public void itemClick(ItemClickEvent event) {
+                                                  BeanItem<Project> projectBean = (BeanItem<Project>) projectTable.getItem(projectTable.getValue());
+                                                  if (projectBean == null) return;
+                                                  Project project = projectBean.getBean();
+                                                  if (event.isDoubleClick()) {
+                                                      if (!role.equals("GIP") && !role.equals("ADMIN")) {
+                                                          Notification.show(NOTIFY_NOTRIGHT, Type.ERROR_MESSAGE);
+                                                          return;
+                                                      } else if (user.equals(project.getBoss()) || role.equals("ADMIN")) {
+                                                          final BeanItem<Project> item = (BeanItem<Project>) projectTable.getItem(projectTable.getValue());
+                                                          if (item != null) {
+                                                              projectEditor.projectEdit(item);
+                                                              UI.getCurrent().addWindow(projectEditor);
+                                                          }
+                                                      }
+                                                  } else {
+                                                      fireComponentEvent();
+                                                  }
+                                              }
+                                          }
 
         );
         if (projectTable.getColumnGenerator("date") == null)
@@ -1207,6 +1209,7 @@ public class MainPage extends CssLayout implements View {
 
     @Autowired
     private RebukePrint rebukePrint;
+
     private void fnRebukePrint() {
         if (((Set<Rebuke>) rebukeTable.getValue()).isEmpty()) {
             Notification.show("Не задано ни одного замечания", Type.ERROR_MESSAGE);
@@ -1419,24 +1422,22 @@ public class MainPage extends CssLayout implements View {
             Notification.show("Не задано ни одного замечания", Type.ERROR_MESSAGE);
             return;
         }
-        if (role.equals("OPP")) {
-            if (((Set<Rebuke>) rebukeTable.getValue()).size() > 1) {
-                Notification.show("Вы можете выбрать только одно замечание!", Type.ERROR_MESSAGE);
+        if (((Set<Rebuke>) rebukeTable.getValue()).size() > 1) {
+            Notification.show("Вы можете выбрать только одно замечание!", Type.ERROR_MESSAGE);
+            return;
+        } else {
+            Set<Rebuke> set = (Set<Rebuke>) rebukeTable.getValue();
+            Rebuke rebuke = new Rebuke();
+            for (Rebuke r : set) {
+                rebuke = r;
+            }
+            if (!rebuke.getMainperformer().equals(department) && !role.equals("ADMIN")) {
+                Notification.show("Вы не можете изменить статус снятия этого замечания! Оно назначено другому подразделению.", Type.ERROR_MESSAGE);
                 return;
-            } else {
-                Set<Rebuke> set = (Set<Rebuke>) rebukeTable.getValue();
-                Rebuke rebuke = new Rebuke();
-                for (Rebuke r : set) {
-                    rebuke = r;
-                }
-                if (!rebuke.getMainperformer().equals(department)) {
-                    Notification.show("Вы не можете изменить статус снятия этого замечания! Оно назначено другому подразделению.", Type.ERROR_MESSAGE);
-                    return;
-                }
-                if (!rebuke.getStatusanswer()) {
-                    Notification.show("Вы не можете изменить статус снятия этого замечания, т.к. ответы не готовы!", Type.ERROR_MESSAGE);
-                    return;
-                }
+            }
+            if (!rebuke.getStatusanswer()) {
+                Notification.show("Вы не можете изменить статус снятия этого замечания, т.к. ответы не готовы!", Type.ERROR_MESSAGE);
+                return;
             }
         }
         Integer numAnswer = 0;
@@ -1602,10 +1603,10 @@ public class MainPage extends CssLayout implements View {
         answerMenuItemFromTotal.setSeparatorVisible(true);
         answerMenuItemDone = answerContextMenu.addItem("Изменить статус готовности");
         answerMenuItemDone.setIcon(new ThemeResource("icons_mini/arrow_refresh.png"));
-        answerMenuItemClose = answerContextMenu.addItem("Запретить редактирование");
-        answerMenuItemClose.setIcon(new ThemeResource("icons_mini/flag_red.png"));
-        answerMenuItemOpen = answerContextMenu.addItem("Разрешить редактирование");
-        answerMenuItemOpen.setIcon(new ThemeResource("icons_mini/flag_green.png"));
+//        answerMenuItemClose = answerContextMenu.addItem("Запретить редактирование");
+//        answerMenuItemClose.setIcon(new ThemeResource("icons_mini/flag_red.png"));
+//        answerMenuItemOpen = answerContextMenu.addItem("Разрешить редактирование");
+//        answerMenuItemOpen.setIcon(new ThemeResource("icons_mini/flag_green.png"));
 
 
         answerTable.addItemClickListener(new ItemClickListener() {
@@ -1615,11 +1616,11 @@ public class MainPage extends CssLayout implements View {
                     Set<Answer> setA = new HashSet<>();
                     setA.addAll((Set<Answer>) answerTable.getValue());
                     if (setA.isEmpty()) {
-                        Notification.show("Для редактирования ОТВЕТА, выберите его в таблице!", Type.ERROR_MESSAGE);
+                        Notification.show("Для редактирования ответа, выберите его в таблице!", Type.ERROR_MESSAGE);
                         return;
                     }
                     if (setA.size() > 1) {
-                        Notification.show("Выбрано более одного ОТВЕТА!", Type.ERROR_MESSAGE);
+                        Notification.show("Выбрано более одного ответа!", Type.ERROR_MESSAGE);
                         return;
                     }
                     Answer ans = setA.iterator().next();
@@ -1629,17 +1630,17 @@ public class MainPage extends CssLayout implements View {
                             answerRepo.saveAndFlush(ans);
                         }
                         if (ans.getTotal()) {
-                            Notification.show("ИТОГОВЫЙ ОТВЕТ закрыт для редактирования Вами!", Type.ERROR_MESSAGE);
+                            Notification.show("Итоговый  ответ закрыт для редактирования!", Type.ERROR_MESSAGE);
                             return;
                         }
                         if (!ans.getRebuketotext().equals(department) && !ans.getRebuketotext().equals("")) {
-                            Notification.show("Это ОТВЕТ не Вашего подразделения!", Type.ERROR_MESSAGE);
+                            Notification.show("Это ответ не Вашего подразделения!", Type.ERROR_MESSAGE);
                             return;
                         } else if (ans.getTotal()) {
-                            Notification.show("ИТОГОВЫЙ ОТВЕТ закрыт для редактирования Вами!", Type.ERROR_MESSAGE);
+                            Notification.show("Итоговый ответ закрыт для редактирования Вами!", Type.ERROR_MESSAGE);
                             return;
-                        } else if (ans.getClose()) {
-                            Notification.show("ОТВЕТ закрыт для редактирования Вами!", Type.ERROR_MESSAGE);
+                        } else if (ans.getClose() || ans.getStatus()) {
+                            Notification.show("Ответ закрыт для редактирования!", Type.ERROR_MESSAGE);
                             return;
                         }
                     }
@@ -1658,15 +1659,15 @@ public class MainPage extends CssLayout implements View {
             public void layoutClick(LayoutEvents.LayoutClickEvent event) {
                 if (event.getButton() == MouseEventDetails.MouseButton.RIGHT) {
                     if (role.equals("USER")) {
-                        answerMenuItemClose.setEnabled(false);
-                        answerMenuItemOpen.setEnabled(false);
+//                        answerMenuItemClose.setEnabled(false);
+//                        answerMenuItemOpen.setEnabled(false);
                         answerMenuItemDelete.setEnabled(false);
                         answerMenuItemDone.setEnabled(false);
                         answerMenuItemFromTotal.setEnabled(false);
                         answerMenuItemToTotal.setEnabled(false);
                     } else {
-                        answerMenuItemClose.setEnabled(true);
-                        answerMenuItemOpen.setEnabled(true);
+//                        answerMenuItemClose.setEnabled(true);
+//                        answerMenuItemOpen.setEnabled(true);
                         answerMenuItemDelete.setEnabled(true);
                         answerMenuItemDone.setEnabled(true);
                         answerMenuItemFromTotal.setEnabled(true);
@@ -1764,9 +1765,9 @@ public class MainPage extends CssLayout implements View {
         Set<Answer> setA = new HashSet<>();
         setA.addAll((Set<Answer>) answerTable.getValue());
         if (setA.isEmpty()) {
-            Notification.show("Для редактирования ОТВЕТА, выберите его в таблице!", Type.ERROR_MESSAGE);
+            Notification.show("Для редактирования ответа, выберите его в таблице!", Type.ERROR_MESSAGE);
         } else if (setA.size() > 1) {
-            Notification.show("Выбрано более одного ОТВЕТА!", Type.ERROR_MESSAGE);
+            Notification.show("Выбрано более одного ответа!", Type.ERROR_MESSAGE);
         } else {
             Answer ans = setA.iterator().next();
             if (!role.equals("ADMIN") && !role.equals("GIP") && !role.equals("OPP")) {
@@ -1775,17 +1776,17 @@ public class MainPage extends CssLayout implements View {
                     answerRepo.saveAndFlush(ans);
                 }
                 if (ans.getTotal()) {
-                    Notification.show("ИТОГОВЫЙ ОТВЕТ закрыт для редактирования Вами!", Type.ERROR_MESSAGE);
+                    Notification.show("Итоговый ответ закрыт для редактирования!", Type.ERROR_MESSAGE);
                     return;
                 }
                 if (!ans.getRebuketotext().equals(department) && !ans.getRebuketotext().equals("")) {
-                    Notification.show("Это ОТВЕТ не Вашего подразделения!", Type.ERROR_MESSAGE);
+                    Notification.show("Это ответ не Вашего подразделения!", Type.ERROR_MESSAGE);
                     return;
                 } else if (ans.getTotal()) {
-                    Notification.show("ИТОГОВЫЙ ОТВЕТ закрыт для редактирования Вами!", Type.ERROR_MESSAGE);
+                    Notification.show("Итоговый ответ закрыт для редактирования!", Type.ERROR_MESSAGE);
                     return;
-                } else if (ans.getClose()) {
-                    Notification.show("ОТВЕТ закрыт для редактирования Вами!", Type.ERROR_MESSAGE);
+                } else if (ans.getClose() || ans.getStatus()) {
+                    Notification.show("Ответ закрыт для редактирования!", Type.ERROR_MESSAGE);
                     return;
                 }
             }
@@ -2091,8 +2092,8 @@ public class MainPage extends CssLayout implements View {
         rebukeTable.setColumnCollapsingAllowed(true);
         if (!isRebukeExpand) {
             rebukeTable.setVisibleColumns("number", "accept", "statusanswer", "status", "repeatnumber",
-                    "sectionproject",  "content", "mainperformer");
-            rebukeTable.setColumnHeaders("№", "П", "Г", "С", "Пов.","Раздел проекта", "Содержание замечания", "Отв.");
+                    "sectionproject", "content", "mainperformer");
+            rebukeTable.setColumnHeaders("№", "П", "Г", "С", "Пов.", "Раздел проекта", "Содержание замечания", "Отв.");
             rebukeTable.setColumnCollapsed("sectionproject", true);
         } else {
             rebukeTable.setVisibleColumns("number", "numberpp", "accept", "statusanswer", "status", "repeatnumber",
@@ -2213,12 +2214,12 @@ public class MainPage extends CssLayout implements View {
         answerTable.setMultiSelectMode(MultiSelectMode.DEFAULT);
         answerTable.setImmediate(true);
         if (!isRebukeExpand) {
-            answerTable.setVisibleColumns("number","formulation", "status", "close", "answertext", "parentdep", "rebuketotext");
-            answerTable.setColumnHeaders("№", "П", "Г", "З", "Содержание ответа", "Отв..", "Исполнитель");
+            answerTable.setVisibleColumns("number", "formulation", "status", "answertext", "parentdep", "rebuketotext");
+            answerTable.setColumnHeaders("№", "П", "Г", "Содержание ответа", "Отв..", "Исполнитель");
         } else {
-            answerTable.setVisibleColumns("number", "numberpp", "formulation", "status", "close", "autor", "answertext", "comment",
+            answerTable.setVisibleColumns("number", "numberpp", "formulation", "status", "autor", "answertext", "comment",
                     "parentdep", "rebuketotext", "datestatus");
-            answerTable.setColumnHeaders("№", "№пп", "П", "Г", "З", "Автор", "Содержание ответа", "Комментарий",
+            answerTable.setColumnHeaders("№", "№пп", "П", "Г", "Автор", "Содержание ответа", "Комментарий",
                     "Отв.", "Исполнитель", "Дата");
             answerTable.setColumnWidth("numberpp", 25);
             answerTable.setColumnWidth("comment", 300);
