@@ -851,6 +851,7 @@ public class MainPage extends CssLayout implements View {
         subCombo.setMargin(false);
         updateRebukeData();
         depCombo.addComponent(depComboBox);
+
         depComboBox.addValueChangeListener(new ValueChangeListener() {
             @Override
             public void valueChange(ValueChangeEvent event) {

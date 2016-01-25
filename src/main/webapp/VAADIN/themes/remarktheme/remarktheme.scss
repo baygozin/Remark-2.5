@@ -1,0 +1,538 @@
+/*@import "../base/base.scss";*/
+
+@import "../reindeer/reindeer.scss";
+
+@mixin remarktheme {
+
+
+  /*
+    @include chameleon;
+  */
+
+  @include reindeer;
+
+  $myfontsize: 14px;
+  $myfont: Arial;
+  $myfontsizemenu: 12px;
+  /*
+    $myselectcolor: #0090ed;
+  */
+  $myselectcolor: #A28A65;
+  $mybuttoncolor: #b4b4b4;
+
+  span.no_selection {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+  }
+
+  .v-ui {
+    background-color: #ffffff;
+    font-family: serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+  }
+
+  .v-csslayout-mainwindow {
+    background-color: #aaaaaa;
+  }
+
+  .v-table-body {
+    overflow-x: hidden !important;
+  }
+
+  .v-textarea {
+    border-radius: 0px;
+  }
+
+  .v-textfield {
+    border-radius: 0px;
+  }
+
+  .v-filterselect-input {
+    background-image: none;
+    border-radius: 0px;
+  }
+
+  /*
+  Button ===============================================================
+  */
+  .v-button {
+    background-image: none;
+    /*     -moz-box-shadow: inset 0px 1px 0px 0px #ffffff; */
+    /*     -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff; */
+    /*box-shadow: inset 0px 1px 0px 0px #ffffff;*/
+    background-color: $mybuttoncolor;
+    /*     -moz-border-radius: 6px; */
+    /*     -webkit-border-radius: 6px; */
+    /*     border-radius: 6px; */
+    /*border: 1px solid $mybuttoncolor;*/
+    display: inline-block;
+    color: $mybuttoncolor;
+    font-family: $myfont;
+    font-size: $myfontsize;
+
+    font-weight: bold;
+    /*     padding: 6px 24px; */
+    text-decoration: none;
+    text-shadow: none;
+  }
+
+  .v-button:hover {
+    background-image: none;
+    background-color: $mybuttoncolor;
+  }
+  .v-button:focus {
+    background-image: none;
+    background-color: $mybuttoncolor;
+  }
+
+  .v-button:active {
+    background-image: none;
+    background-color: $mybuttoncolor;
+  }
+
+  .v-button-wrap {
+    background-image: none;
+    text-decoration: none;
+    text-shadow: none;
+  }
+  .v-button-wrap:focus {
+    background-image: none;
+    background-color: $mybuttoncolor;
+  }
+  .v-button:hover .v-button-wrap {
+    background-image: none;
+    background-color: $mybuttoncolor;
+  }
+  .v-button:focus .v-button-wrap {
+    background-image: none;
+    background-color: $mybuttoncolor;
+  }
+
+  .v-button:active .v-button-wrap {
+    background-image: none;
+    background-color: $mybuttoncolor;
+  }
+
+  /*
+   X Button ===============================================================
+  */
+
+  .v-layout .v-margin-left {
+    padding-left: 5px;
+  }
+
+  .v-layout.v-margin-right {
+    padding-right: 5px;
+  }
+
+  .v-layout.v-margin-top {
+    padding-top: 2px;
+  }
+
+  .v-layout.v-margin-bottom {
+    padding-bottom: 5px;
+  }
+
+  .v-textfield-test {
+    border: 1px solid gray;
+  }
+
+  input.v-textfield,
+  textarea.v-textarea {
+    font-size: $myfontsizemenu;
+  }
+
+  textarea.v-textarea-answertext {
+    font-size: 14px;
+  }
+
+  .v-menubar-submenu .v-menubar-menuitem-selected {
+    font-family: $myfont;
+    font-size: $myfontsizemenu;
+  }
+
+  .v-table .v-selected,
+  .v-table tr.v-selected {
+    background-color: $myselectcolor;
+    color: #ffffff;
+    background-image: none;
+    border: 1px dotted gray;
+  }
+
+  .v-table-header {
+    text-transform: none;
+  }
+
+  .v-table-table {
+    border-spacing: 1px;
+    border-collapse: collapse;
+    cursor: default;
+  }
+
+  .v-table-row,
+  .v-table-row-odd {
+    border: 1px solid rgb(200, 200, 200);
+    background: transparent;
+    cursor: default;
+    height: 18px;
+  }
+
+  .v-table-focus .v-table-cell-wrapper {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    cursor: default;
+  }
+
+  .v-table.v-table-cell-wrapper {
+    border: 1px solid rgb(151, 151, 151) !important;
+  }
+
+  /*
+    .v-table-cell-content {
+  */
+  /*    border-right: 1px solid #aaa;*//*
+
+    }
+  */
+
+/*
+  .v-context-menu {
+    float: left;
+    font-family: Arial;
+    font-size: 14px;
+    background-color: #f0f0f0;
+    border-bottom:  1px solid #848484;
+  }
+*/
+
+  .v-context-menu .v-context-menu-item-basic,
+  .v-context-menu .v-context-menu-item-basic-submenu {
+    float: left;
+    clear: left;
+    height: 26px;
+    color: #222;
+    cursor: pointer;
+    background-color: #ffffff;
+  }
+
+  .v-context-menu .v-context-menu-item-basic:focus,
+  .v-context-menu .v-context-menu-item-basic-submenu:focus,
+  .v-context-menu .v-context-menu-item-basic-open {
+    background-color: $myselectcolor;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .v-context-menu .v-context-menu-item-basic.v-context-menu-item-separator,
+  .v-context-menu .v-context-menu-item-basic-submenu.v-context-menu-item-separator {
+    border-bottom: 1px solid #bababa;
+  }
+
+  .v-context-menu .v-context-menu-item-basic-submenu {
+    background: url(icons_mini/splitRight.png) no-repeat center right;
+    color: #000000;
+  }
+
+  .v-contextmenu {
+    //width: 230px;
+    background-color: white;
+    border: 1px solid gray;
+    padding: 0;
+    border-radius: 0;
+    font-size: $myfontsize;
+  }
+
+  .v-contextmenu .gwt-MenuItem-selected {
+    text-shadow: 0 .1em .1em rgba(0, 0, 0, .3);
+    color: #ffffff;
+    background: $myselectcolor;
+    background: -moz-linear-gradient(top, $myselectcolor 0%, $myselectcolor 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $myselectcolor), color-stop(100%, $myselectcolor));
+    background: -webkit-linear-gradient(top, $myselectcolor 0%, $myselectcolor 100%);
+    background: -o-linear-gradient(top, $myselectcolor 0%, $myselectcolor 100%);
+    background: -ms-linear-gradient(top, $myselectcolor 0%, $myselectcolor 100%);
+    background: linear-gradient(to bottom, $myselectcolor 0%, $myselectcolor 100%);
+  }
+
+  .v-menubar-menuitem-selected,
+  .v-menubar-submenu .v-menubar-menuitem-selected {
+    /*	font-family: serif;*/
+    background-color: $myselectcolor;
+    color: #ffffff;
+  }
+
+  .v-filterselect-suggestpopup {
+    background-color: white;
+    border: 1px solid gray;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .v-filterselect-suggestpopup .gwt-MenuItem-selected {
+    text-shadow: 0 .1em .1em rgba(0, 0, 0, .3);
+    color: #ffffff;
+    background: #6ba7e4;
+    background: -moz-linear-gradient(top, $myselectcolor 0%, $myselectcolor 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $myselectcolor), color-stop(100%, $myselectcolor));
+    background: -webkit-linear-gradient(top, $myselectcolor 0%, $myselectcolor 100%);
+    background: -o-linear-gradient(top, $myselectcolor 0%, $myselectcolor 100%);
+    background: -ms-linear-gradient(top, $myselectcolor 0%, $myselectcolor 100%);
+    background: linear-gradient(to bottom, $myselectcolor 0%, $myselectcolor 100%);
+  }
+
+  /*
+    .v-filterselect-suggestmenu .gwt-MenuItem {
+      background-color: $myselectcolor;
+      color: #ffffff;
+    }
+  */
+
+  .v-caption {
+    font-family: $myfont;
+    font-size: $myfontsize - 2;
+  }
+
+  .v-menubar {
+    border: 1px solid gray;
+    font-family: $myfont;
+    font-size: $myfontsizemenu;
+    background: gray !important;
+    background-color: $myselectcolor;
+    color: #ffffff;
+  }
+
+  .v-menubar .v-menubar-menuitem {
+    cursor: default;
+    font-weight: bold;
+  }
+
+  .v-menubar .v-menubar-menuitem-selected {
+    background: $myselectcolor repeat-x;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #3b5a7a;
+  }
+
+  .v-menubar-submenu .v-menubar-menuitem-selected {
+    background: $myselectcolor repeat-x;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #3b5a7a;
+  }
+
+  .v-menubar-submenu {
+    width: 200px;
+    background-color: white;
+    border: 1px solid gray;
+    padding: 0;
+    border-radius: 0;
+    font-family: $myfont;
+    font-size: $myfontsizemenu;
+  }
+
+  /*
+    .v-table {
+      background-color: #d0d0d0;
+      cursor: default;
+    }
+  */
+
+  .v-label {
+    font-family: $myfont;
+  }
+
+  .v-label-answer {
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .v-textarea-answer {
+    font-size: 20px;
+  }
+
+  .v-label-remarklabel {
+    font-size: 40px;
+  }
+
+  .v-label-tablestatus {
+    /*	font-weight: normal;*/
+  }
+
+  .v-label-status {
+    margin: 0 0 0 10px;
+  }
+
+/*
+  .v-label-white {
+    background: white;
+    border: thin black solid;
+  }
+*/
+
+  .v-label-pink {
+    background: pink;
+    border: thin black solid;
+  }
+
+  .v-label-yellow {
+    background: #ffffff;
+    text-align: center;
+    padding: 2px;
+    color: #000000;
+    border-radius: 5px;
+    border: thin #606060 solid;
+  }
+
+  .v-label-green {
+    background: rgb(255, 255, 255);
+    text-align: center;
+    padding: 2px;
+    color: #000000;
+    border-radius: 5px;
+    border: thin #606060 solid;
+  }
+
+  .v-label-white {
+    background: #ffffff;
+    text-align: center;
+    border: thin black solid;
+  }
+
+  .v-label-gray {
+    background: rgb(126, 126, 126);
+    border: thin black solid;
+  }
+
+  .v-label-statuslabel {
+    /*font-weight: bold;*/
+
+  }
+  /* Белый*/
+  .v-table-row-rebukestatus0 {
+    /*	font-family: serif;*/
+    font-size: $myfontsize;
+  }
+
+  .v-label-rebukecontext {
+    font-size: $myfontsize;
+    font-family: $myfont;
+  }
+
+  .v-label-formulation {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  /* Желтый */
+  .v-table-row-rebukestatus1 {
+    background: rgb(255, 255, 100);
+    font-size: $myfontsize;
+  }
+  /* Зеленый */
+  .v-table-row-rebukestatus2 {
+    background: rgb(100, 255, 100);
+    font-size: $myfontsize;
+  }
+  /* Розовый */
+  .v-table-row-rebukestatus3 {
+    background: rgb(255, 160, 229);
+    font-size: $myfontsize;
+  }
+
+  /* Серый */
+  .v-table-row-rebukestatus4 {
+    background: rgb(220, 220, 220);
+    font-size: $myfontsize;
+  }
+
+  /* Красный */
+  .v-table-row-rebukestatus5 {
+    background: rgb(142, 200, 130);
+    color: #000000;
+    font-size: $myfontsize;
+  }
+
+  /* */
+  .v-table-row-expertstatus {
+    background: rgb(100, 255, 100);
+    font-size: 14px;
+  }
+
+  /* Рамка и фон для формы регистрации */
+  .v-layout-myformlayout {
+    background: rgb(230, 230, 230);
+    border: solid 1px rgb(100, 100, 100);
+  }
+
+  .toollayout {
+    background: rgb(225, 225, 225);
+    /*border: solid 1px rgb(117, 117, 117);*/
+  }
+
+  /* Отображение справа пункта меню */
+  .v-menubar-menuitem-mainMenuRight {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    float: right;
+  }
+
+  .v-table-cell-content-white {
+    background: #ffffff;
+  }
+
+  .v-table-cell-content-red {
+    background: #ff8c8c;
+  }
+
+  .v-table-cell-content-yellow {
+    background: #ffff8c;
+  }
+
+  .v-table-cell-content-green {
+    background: #8cff8c;
+  }
+
+  /* Стиль панелей ответа на замечание */
+  .v-panel {
+    /*    font-family: serif;*/
+  }
+
+  .v-panel-content {
+    padding-left: 5px;
+    padding-right: 5px;
+    overflow: hidden;
+    border: 1px solid gray;
+  }
+
+  .v-panel-content-answerpanel {
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 100px;
+  }
+
+  .v-panel-caption {
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 4px;
+    color: #000000;
+    /*    background-color: rgb(173, 173, 173);*/
+    padding-left: 0;
+    /*    background-image: url("img/background.jpg");*/
+    border-width: 0;
+    //border: 1px solid gray;
+  }
+
+  .mystyle {
+    border: 1px solid #979797;
+    //color: #ffffff;
+    background: #c5c5c5;
+  }
+  .mylayoutstyle {
+    background: #c5c5c5;
+  }
+
+
+}
